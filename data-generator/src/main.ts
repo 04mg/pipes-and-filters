@@ -2,11 +2,7 @@ import axios from "axios";
 import CustomData from "./custom-data";
 const faker = require("faker");
 
-const sendData = async () => {
-  const data: CustomData = {
-    data: faker.random.word(),
-  };
-
+const sendData = async <T>(data: T) => {
   try {
     const response = await axios.post("http://localhost:3005/process", data);
     console.log("Data sent successfully:", response.data);
@@ -26,4 +22,6 @@ const sendData = async () => {
   }
 };
 
-sendData();
+sendData<CustomData>({
+  data: faker.random.word(),
+});
